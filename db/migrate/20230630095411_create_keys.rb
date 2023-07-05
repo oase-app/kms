@@ -3,7 +3,7 @@ class CreateKeys < ActiveRecord::Migration[7.0]
     enable_extension 'pgcrypto'
     create_table :keys, id: :uuid do |t|
       t.string :oase_id
-      t.string :value
+      t.string :base64
       t.string :issuer
 
       t.timestamps

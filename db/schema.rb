@@ -17,7 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_30_095411) do
 
   create_table "keys", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "oase_id"
-    t.string "value"
+    t.string "base64"
     t.string "issuer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

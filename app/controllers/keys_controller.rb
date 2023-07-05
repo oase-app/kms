@@ -1,9 +1,4 @@
 class KeysController < ApplicationController
-  ALLOWED_ISSUERS = [
-    'https://api.oase.app',
-    'http://localhost:4000'
-  ].freeze
-
   def error_head(status, message)
     render status:, json: { error: message }
   end
@@ -19,25 +14,25 @@ class KeysController < ApplicationController
     return error_head(:bad_request, 'oase_id not matching') if token['_oase_id'] != params[:oase_id]
     return error_head(:bad_request, 'key_id not matching') if token['sub'] != params[:key_id]
     return error_head(:bad_request, 'token expired') if token['exp'] < Time.now.to_i
-    return error_head(:bad_request, 'issuer not allowed') unless ALLOWED_ISSUERS.include?(token['iss'])
 
     @key = if params[:key_id] == 'current'
-             Key.current(oase_id: params[:oase_id])
+             Key.current(oase_id: params[:oase_id], issuer: token['iss'])
            else
-             Key.find_by(id: params[:key_id], oase_id: params[:oase_id])
+             Key.find_by(id: params[:key_id], oase_id: params[:oase_id], issuer: token['iss'])
            end
 
     return head :not_found if @key.nil?
 
     render json: {
-      key: @key.value,
+      base64: @key.base64,
       kid: @key.id
     }
   end
 
   def create
     oase_id = params[:oase_id]
-    Key.generate(oase_id:)
+    issuer = params[:issuer]
+    Key.generate(oase_id:, issuer:)
     head :created
   end
 

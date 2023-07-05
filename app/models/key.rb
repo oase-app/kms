@@ -1,12 +1,14 @@
 class Key < ApplicationRecord
-  def self.generate(oase_id:)
+  def self.generate(oase_id:, issuer:)
+    key = SecureRandom.random_bytes(32)
     create(
       oase_id:,
-      value: SecureRandom.uuid
+      issuer:,
+      base64: Base64.strict_encode64(key)
     )
   end
 
-  def self.current(oase_id:)
-    where(oase_id:).order(created_at: :desc).first || generate(oase_id:)
+  def self.current(oase_id:, issuer:)
+    where(oase_id:, issuer:).order(created_at: :desc).first || generate(oase_id:, issuer:)
   end
 end
