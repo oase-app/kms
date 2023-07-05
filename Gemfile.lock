@@ -67,6 +67,10 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
     aes_key_wrap (1.1.0)
+    airbrake (13.0.3)
+      airbrake-ruby (~> 6.0)
+    airbrake-ruby (6.2.1)
+      rbtree3 (~> 0.6)
     bindata (2.4.15)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
@@ -167,6 +171,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    rbtree3 (0.7.1)
     reline (0.3.5)
       io-console (~> 0.5)
     ruby2_keywords (0.0.5)
@@ -186,6 +191,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  airbrake
   bootsnap
   debug
   httparty
