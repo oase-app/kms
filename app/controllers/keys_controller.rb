@@ -7,7 +7,7 @@ class KeysController < ApplicationController
     return error_head(:unauthorized, 'missing authorization header') if token.nil?
     return error_head(:unauthorized, 'aud not matching') if token['aud'] != request.url
 
-    if token['_oase_id'].nil? || token['_participant_id'].nil?
+    if token['_oase_id'].nil?
       return error_head(:bad_request,
                         'missing oase or participant')
     end
