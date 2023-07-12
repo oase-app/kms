@@ -51,8 +51,13 @@ class KeysController < ApplicationController
     @token ||= lambda do
       string = request.headers['Authorization'].split(' ').last
       payload = JSON::JWT.decode(string, :skip_verification)
-      jwks_url = "#{payload['iss']}/.well-known/jwks.json"
-      jwks = JSON.parse(HTTParty.get(jwks_url).body)
+
+      issuer = payload['iss']
+      jwks = Rails.cache.fetch(issuer, expires_in: 12.hours) do
+        Rails.logger.info "Fetching jwks for #{issuer}"
+        jwks_url = "#{issuer}/.well-known/jwks.json"
+        JSON.parse(HTTParty.get(jwks_url).body)
+      end
 
       decoded_token = nil
       jwks['keys'].each do |jwk|
