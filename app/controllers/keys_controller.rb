@@ -1,5 +1,6 @@
 class KeysController < ApplicationController
   def error_head(status, message)
+    Rails.logger.warn "#{status}: #{message}"
     render status:, json: { error: message }
   end
 
