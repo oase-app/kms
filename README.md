@@ -1,24 +1,15 @@
-# README
+A small Rails app that handles encryption keys for Oase.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Installation
 
-Things you may want to cover:
+You need a working Ruby environment with Ruby on Rails installed. You also need a working PostgreSQL database.
 
-* Ruby version
+In the database, create a role with create database privileges.
 
-* System dependencies
+Now run
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+bundle install
+rake db:create
+rake db:migrate
+```
