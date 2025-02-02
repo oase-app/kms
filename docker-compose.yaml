@@ -1,0 +1,9 @@
+services:
+  oase-kms:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - RAILS_MASTER_KEY=replace_me_with_a_secret_fe0421e
+    ports:
+      - "3000:3000"
