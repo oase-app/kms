@@ -4,6 +4,12 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - RAILS_MASTER_KEY=replace_me_with_a_secret_fe0421e
+      - DATABASE_URL=postgresql://postgres:notsosecret@oase-postgres:5432/key_store_test
     ports:
       - "3000:3000"
+  oase-postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=notsosecret
+    ports:
+      - 5432:5432

@@ -11,7 +11,7 @@ default: &default
 
 development:
   <<: *default
-  url: "postgresql://holder:holder@localhost:5432/key_store"
+  url: <%= ENV.fetch("DATABASE_URL") { "postgresql://holder:holder@localhost:5432/key_store"} %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
