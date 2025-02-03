@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile
     environment:
       - RAILS_ENV=development
+      - RAILS_MAX_THREADS=5
       - DATABASE_URL=postgresql://postgres:notsosecret@oase-postgres:5432/key_store
     ports:
       - "3000:3000"

@@ -18,8 +18,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  url: "postgresql://holder:holder@localhost:5432/key_store_test"
+  url: <%= ENV.fetch("DATABASE_URL") { "postgresql://holder:holder@localhost:5432/key_store_test"} %>
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: <%= ENV.fetch("DATABASE_URL") { "db/production.sqlite3"} %>
