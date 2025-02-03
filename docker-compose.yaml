@@ -4,7 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - DATABASE_URL=postgresql://postgres:notsosecret@oase-postgres:5432/key_store_test
+      - RAILS_ENV=development
+      - DATABASE_URL=postgresql://postgres:notsosecret@oase-postgres:5432/key_store
     ports:
       - "3000:3000"
   oase-postgres:
