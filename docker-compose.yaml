@@ -1,3 +1,6 @@
+networks:
+  oase-network:
+
 services:
   oase-kms:
     build:
@@ -8,12 +11,17 @@ services:
       - RAILS_MAX_THREADS=5
       - RAILS_MASTER_KEY=
       - PORT=3002
-      - DATABASE_URL=postgresql://postgres:notsosecret@oase-postgres:5432/key_store
+      - DATABASE_URL=postgresql://postgres:verysecret@oase-postgres:5433/key_store
     ports:
       - "3002:3002"
-  oase-postgres:
+    networks:
+      - oase-network
+  oase-postgres-kms:
     image: postgres
     environment:
-      - POSTGRES_PASSWORD=notsosecret
+      - POSTGRES_PASSWORD=verysecret
+      - POSTGRES_PORT=5433
     ports:
-      - 5432:5432
+      - 5433:5433
+    networks:
+      - oase-network

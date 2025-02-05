@@ -4,8 +4,6 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    outputs:
-      version: "0.1"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
