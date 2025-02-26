@@ -1,5 +1,6 @@
 networks:
   oase-network:
+    external: true
 
 services:
   oase-kms:
@@ -14,6 +15,9 @@ services:
       - DATABASE_URL=postgresql://postgres:verysecret@oase-postgres-kms:5432/key_store
     ports:
       - "3002:3002"
+    depends_on:
+      oase-postgres-kms:
+        condition: service_started
     networks:
       - oase-network
   oase-postgres-kms:
