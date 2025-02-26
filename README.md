@@ -4,7 +4,7 @@ A small Rails app that handles encryption keys for Oase.
 
 ```
 docker network create oase-network
-docker compose -f docker-compose.dev.yaml up -d
+docker compose up -d
 ```
 
 The KMS will now be available on http://localhost:4000 and should be able to reach the mainframe on the docker network `oase-network`.
