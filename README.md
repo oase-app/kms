@@ -1,5 +1,14 @@
 A small Rails app that handles encryption keys for Oase.
 
+## Running with Docker (preferred)
+
+```
+docker network create oase-network
+docker compose -f docker-compose.dev.yaml up -d
+```
+
+The KMS will now be available on http://localhost:4000 and should be able to reach the mainframe on the docker network `oase-network`.
+
 ## Installation
 
 You need a working Ruby environment with Ruby on Rails installed. You also need a working PostgreSQL database.
