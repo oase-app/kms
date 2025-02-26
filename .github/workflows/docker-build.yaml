@@ -7,6 +7,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - run: docker network create oase-network
       - name: Docker Compose Action
         uses: hoverkraft-tech/compose-action@v2.0.2
         with:
