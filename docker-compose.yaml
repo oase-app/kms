@@ -13,6 +13,8 @@ services:
       - RAILS_MASTER_KEY=
       - PORT=3002
       - DATABASE_URL=postgresql://postgres:verysecret@oase-postgres-kms:5432/key_store
+    volumes:
+      - .:/rails
     ports:
       - "3002:3002"
     depends_on:
