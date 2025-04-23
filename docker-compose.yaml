@@ -1,0 +1,30 @@
+networks:
+  oase-network:
+    external: true
+
+services:
+  oase-kms:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - RAILS_ENV=development
+      - RAILS_MAX_THREADS=5
+      - RAILS_MASTER_KEY=
+      - PORT=3002
+      - DATABASE_URL=postgresql://postgres:verysecret@oase-postgres-kms:5432/key_store
+    ports:
+      - "3002:3002"
+    depends_on:
+      oase-postgres-kms:
+        condition: service_started
+    networks:
+      - oase-network
+  oase-postgres-kms:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=verysecret
+    ports:
+      - 5433:5432
+    networks:
+      - oase-network
